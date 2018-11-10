@@ -46,7 +46,7 @@ public class HockeyController {
     }
 
     @MessageMapping("/app")
-    public void test() {
-        System.out.println("Message Received!");
+    public void test(String message) {
+        System.out.println(message);
     }
 }

@@ -8,11 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static com.hack.collective.hockey.enums.Direction.*;
+import static java.util.Collections.emptyList;
 
 @Service
 public class HockeyService {
@@ -43,11 +42,13 @@ public class HockeyService {
         while (true) {
             if (System.currentTimeMillis() - timer > 2000) {
                 if (devices.size() <= 1) {
-                    sendData(Optional.empty());
+                    sendData(emptyList());
+                    devices = new ArrayList<>();
                     return;
                 }
 
-                sendData(Optional.of(createScreenResponses()));
+                sendData(createScreenResponses());
+                devices = new ArrayList<>();
                 isInitialising = false;
             }
         }
@@ -93,7 +94,7 @@ public class HockeyService {
 
 
 
-    private void sendData(Optional<List<ScreenResponse>> coordinates) {
+    private void sendData(List<ScreenResponse> coordinates) {
         template.convertAndSend("/init", coordinates);
     }
 

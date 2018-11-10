@@ -17,6 +17,6 @@ open class WebSocketConfig : WebSocketMessageBrokerConfigurer {
 
     override fun configureMessageBroker(registry: MessageBrokerRegistry) {
         registry.setApplicationDestinationPrefixes("/app")
-                .enableSimpleBroker("/game", "/initialise")
+                .enableSimpleBroker("/initialise")
     }
 }

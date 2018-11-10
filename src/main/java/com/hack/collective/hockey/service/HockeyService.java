@@ -38,18 +38,19 @@ public class HockeyService {
 
     private void runTimer() {
         isInitialising = true;
+        timer = System.currentTimeMillis();
 
         while (true) {
             if (System.currentTimeMillis() - timer > 2000) {
                 if (devices.size() <= 1) {
                     sendData(emptyList());
-                    devices = new ArrayList<>();
+                    tearDown();
                     return;
                 }
 
                 sendData(createScreenResponses());
-                devices = new ArrayList<>();
-                isInitialising = false;
+                tearDown();
+                return;
             }
         }
     }
@@ -99,6 +100,7 @@ public class HockeyService {
     }
 
     public void tearDown() {
+        isInitialising = false;
         devices.clear();
     }
 }

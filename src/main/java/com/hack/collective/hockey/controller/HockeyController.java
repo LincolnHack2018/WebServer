@@ -6,6 +6,7 @@ import com.hack.collective.hockey.service.HockeyService;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,5 +43,10 @@ public class HockeyController {
 
         template.convertAndSend("/init", Optional.of(singletonList(c)));
         return ResponseEntity.ok("Test message sent!");
+    }
+
+    @MessageMapping("/app")
+    public void test() {
+        System.out.println("Message Received!");
     }
 }

@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class Device {
+    private String id;
     private float touchDownX;
     private float touchDownY;
     private float touchUpX;

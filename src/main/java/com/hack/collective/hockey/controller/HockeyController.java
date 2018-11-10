@@ -1,9 +1,8 @@
 package com.hack.collective.hockey.controller;
 
-import com.hack.collective.hockey.domain.Coordinate;
+import com.hack.collective.hockey.domain.ScreenResponse;
 import com.hack.collective.hockey.domain.Device;
 import com.hack.collective.hockey.service.HockeyService;
-import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -39,7 +38,7 @@ public class HockeyController {
 
     @GetMapping("/test")
     public ResponseEntity testMessage() {
-        Coordinate  c = new Coordinate();
+        ScreenResponse c = new ScreenResponse();
 
         template.convertAndSend("/init", Optional.of(singletonList(c)));
         return ResponseEntity.ok("Test message sent!");

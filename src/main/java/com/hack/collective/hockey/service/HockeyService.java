@@ -1,15 +1,18 @@
 package com.hack.collective.hockey.service;
 
-import com.hack.collective.hockey.domain.Coordinate;
+import com.hack.collective.hockey.domain.ScreenResponse;
 import com.hack.collective.hockey.domain.Device;
+import com.hack.collective.hockey.enums.Direction;
+import com.hack.collective.hockey.utils.ScreenResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
+
+import static com.hack.collective.hockey.enums.Direction.*;
 
 @Service
 public class HockeyService {
@@ -44,18 +47,53 @@ public class HockeyService {
                     return;
                 }
 
-                sendData(Optional.of(createCoordinates()));
+                sendData(Optional.of(createScreenResponses()));
                 isInitialising = false;
             }
         }
     }
 
-    private List<Coordinate> createCoordinates() {
+    private List<ScreenResponse> createScreenResponses() {
+        ScreenResponseUtil screenResponseUtil = new ScreenResponseUtil();
+        List<ScreenResponse> screenResponseList = new ArrayList<ScreenResponse>();
 
-        return null;
+        for(int i = 0; i < devices.size(); i++){
+            Direction downDirection = screenResponseUtil.getDownDirection(devices.get(i));
+            Direction upDirection = screenResponseUtil.getUpDirection(devices.get(i));
+
+            if(downDirection != CENTER){
+                ScreenResponse screenResponse = new ScreenResponse();
+                if(i != 0) {
+                    int previousId = i;
+                    previousId--;
+                    screenResponse.setId(devices.get(previousId).getId());
+                    screenResponseUtil.setScreenResponsePlusMinus(devices.get(i), downDirection, screenResponse);
+                    screenResponse.setIntersectX(devices.get(previousId).getTouchUpX());
+                    screenResponse.setIntersectY(devices.get(previousId).getTouchUpY());
+                    screenResponseList.add(screenResponse);
+                }
+            }
+            if(upDirection != CENTER){
+                ScreenResponse screenResponse = new ScreenResponse();
+                if(i != devices.size() -1){
+                    int nextId = i;
+                    nextId++;
+                    screenResponse.setId(devices.get(nextId).getId());
+                    screenResponseUtil.setScreenResponsePlusMinus(devices.get(i),upDirection,screenResponse);
+                    screenResponse.setIntersectX(devices.get(nextId).getTouchDownX());
+                    screenResponse.setIntersectY(devices.get(nextId).getTouchDownY());
+                    screenResponseList.add(screenResponse);
+                }
+
+            }
+        }
+
+        return screenResponseList;
     }
 
-    private void sendData(Optional<List<Coordinate>> coordinates) {
+
+
+    private void sendData(Optional<List<ScreenResponse>> coordinates) {
         template.convertAndSend("/init", coordinates);
     }
 

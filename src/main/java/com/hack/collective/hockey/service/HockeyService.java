@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +19,10 @@ public class HockeyService {
     private static List<Device> devices;
     private static long timer;
     private static boolean isInitialising;
+
+    static {
+        devices = new ArrayList<>();
+    }
 
     public void init(Device device) {
         devices.add(device);
@@ -50,7 +56,7 @@ public class HockeyService {
     }
 
     private void sendData(Optional<List<Coordinate>> coordinates) {
-        template.convertAndSend("/initialise", coordinates);
+        template.convertAndSend("/init", coordinates);
     }
 
     public void tearDown() {

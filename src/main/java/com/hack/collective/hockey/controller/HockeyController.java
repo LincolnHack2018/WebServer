@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
 
-import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 
 @RestController
@@ -37,7 +36,7 @@ public class HockeyController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping
+    @GetMapping("/test")
     public ResponseEntity testMessage() {
         val c = Coordinate.builder()
                 .x(1.0f)
@@ -45,6 +44,6 @@ public class HockeyController {
                 .build();
 
         template.convertAndSend("/initialise", Optional.of(singletonList(c)));
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok("Test message sent!");
     }
 }

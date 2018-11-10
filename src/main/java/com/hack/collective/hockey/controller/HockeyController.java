@@ -38,9 +38,9 @@ public class HockeyController {
 
     @GetMapping("/test")
     public ResponseEntity testMessage() {
-        Coordinate c = new Coordinate();
+        Coordinate  c = new Coordinate();
 
-        template.convertAndSend("/initialise", Optional.of(singletonList(c)));
+        template.convertAndSend(Optional.of(singletonList(c)));
         return ResponseEntity.ok("Test message sent!");
     }
 }

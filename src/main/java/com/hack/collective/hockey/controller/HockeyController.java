@@ -40,7 +40,7 @@ public class HockeyController {
     public ResponseEntity testMessage() {
         Coordinate  c = new Coordinate();
 
-        template.convertAndSend(Optional.of(singletonList(c)));
+        template.convertAndSend("/init", Optional.of(singletonList(c)));
         return ResponseEntity.ok("Test message sent!");
     }
 }

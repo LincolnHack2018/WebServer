@@ -9,7 +9,7 @@ import static com.hack.collective.hockey.enums.Direction.*;
 public class ScreenResponseUtil {
     private static final int TOLERANCE = 100;
 
-    public void setScreenResponsePlusMinus(Device device, Direction direction, ScreenResponse screenResponse){
+    public void setScreenResponsePlusMinusDown(Device device, Direction direction, ScreenResponse screenResponse){
         switch (direction){
             case BOTTOM:
             case TOP:
@@ -20,6 +20,21 @@ public class ScreenResponseUtil {
             case LEFT:
                 screenResponse.setIntersectMinus(device.getTouchDownY());
                 screenResponse.setIntersectPlus(device.getDeviceHeight() - device.getTouchDownY());
+                break;
+        }
+    }
+
+    public void setScreenResponsePlusMinusUp(Device device, Direction direction, ScreenResponse screenResponse){
+        switch (direction){
+            case BOTTOM:
+            case TOP:
+                screenResponse.setIntersectMinus(device.getTouchUpX());
+                screenResponse.setIntersectPlus(device.getDeviceWidth() - device.getTouchUpX());
+                break;
+            case RIGHT:
+            case LEFT:
+                screenResponse.setIntersectMinus(device.getTouchUpY());
+                screenResponse.setIntersectPlus(device.getDeviceHeight() - device.getTouchUpY());
                 break;
         }
     }

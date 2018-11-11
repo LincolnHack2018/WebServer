@@ -11,4 +11,5 @@ public class ScreenResponse {
     private float intersectPlus;
     private float intersectMinus;
     private Direction direction;
+    private boolean mainDevice;
 }

@@ -40,11 +40,11 @@ public class ScreenResponseUtil {
     }
 
     public Direction getDownDirection(Device device) {
-        if(device.getTouchDownX() > 0 && device.getTouchDownX() < TOLERANCE){
+        if(device.getTouchDownX() >= 0 && device.getTouchDownX() < TOLERANCE){
             return LEFT;
         }else if(device.getTouchDownX() < device.getDeviceWidth() && device.getTouchDownX() > device.getDeviceWidth() - TOLERANCE){
             return RIGHT;
-        }else if(device.getTouchDownY() > 0 && device.getTouchDownY() < TOLERANCE){
+        }else if(device.getTouchDownY() >= 0 && device.getTouchDownY() < TOLERANCE){
             return BOTTOM;
         }else if(device.getTouchDownY() < device.getDeviceWidth() && device.getTouchDownY() > device.getDeviceWidth() - TOLERANCE){
             return TOP;
@@ -53,11 +53,11 @@ public class ScreenResponseUtil {
     }
 
     public Direction getUpDirection(Device device) {
-        if(device.getTouchUpX() > 0 && device.getTouchUpX() < TOLERANCE){
+        if(device.getTouchUpX() >= 0 && device.getTouchUpX() < TOLERANCE){
             return LEFT;
         }else if((device.getTouchUpX() < device.getDeviceWidth() && device.getTouchUpX() > device.getDeviceWidth() - TOLERANCE)){
             return RIGHT;
-        }else if(device.getTouchUpY() > 0 && device.getTouchUpY() < TOLERANCE){
+        }else if(device.getTouchUpY() >= 0 && device.getTouchUpY() < TOLERANCE){
             return BOTTOM;
         }else if(device.getTouchUpY() < device.getDeviceHeight() && device.getTouchUpY() > device.getDeviceHeight() - TOLERANCE){
             return TOP;

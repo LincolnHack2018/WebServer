@@ -1,5 +1,6 @@
 package com.hack.collective.hockey.controller;
 
+import com.hack.collective.hockey.domain.Coordinate;
 import com.hack.collective.hockey.domain.ScreenResponse;
 import com.hack.collective.hockey.domain.Device;
 import com.hack.collective.hockey.service.HockeyService;
@@ -47,5 +48,11 @@ public class HockeyController {
     @MessageMapping("/games")
     public void test(String message) {
         System.out.println(message);
+    }
+
+    @MessageMapping("/position")
+    public void test(Coordinate coordinate) {
+        System.out.println("SENDING: " + coordinate);
+        template.convertAndSend("/position", coordinate);
     }
 }

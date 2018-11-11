@@ -41,6 +41,7 @@ public class HockeyService {
         timer = System.currentTimeMillis();
 
         while (true) {
+            System.out.println(devices);
             if (System.currentTimeMillis() - timer > 2000) {
                 if (devices.size() <= 1) {
                     sendData(emptyList());

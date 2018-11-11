@@ -1,5 +1,6 @@
 package com.hack.collective.hockey.domain;
 
+import com.hack.collective.hockey.enums.Direction;
 import lombok.Data;
 
 @Data
@@ -9,4 +10,5 @@ public class ScreenResponse {
     private float intersectY;
     private float intersectPlus;
     private float intersectMinus;
+    private Direction direction;
 }

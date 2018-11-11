@@ -44,7 +44,7 @@ public class HockeyController {
         return ResponseEntity.ok("Test message sent!");
     }
 
-    @MessageMapping("/game")
+    @MessageMapping("/games")
     public void test(String message) {
         System.out.println(message);
     }

@@ -7,7 +7,7 @@ import com.hack.collective.hockey.enums.Direction;
 import static com.hack.collective.hockey.enums.Direction.*;
 
 public class ScreenResponseUtil {
-    private static final int TOLERANCE = 30;
+    private static final int TOLERANCE = 100;
 
     public void setScreenResponsePlusMinus(Device device, Direction direction, ScreenResponse screenResponse){
         switch (direction){

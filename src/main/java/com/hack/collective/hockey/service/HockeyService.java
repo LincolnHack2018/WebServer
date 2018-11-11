@@ -58,32 +58,31 @@ public class HockeyService {
 
     private List<ScreenResponse> createScreenResponses() {
         ScreenResponseUtil screenResponseUtil = new ScreenResponseUtil();
-        List<ScreenResponse> screenResponseList = new ArrayList<ScreenResponse>();
+        List<ScreenResponse> screenResponseList = new ArrayList<>();
 
         for(int i = 0; i < devices.size(); i++){
-            Direction downDirection = screenResponseUtil.getDownDirection(devices.get(i));
-            Direction upDirection = screenResponseUtil.getUpDirection(devices.get(i));
+            Direction touchDownDirection = screenResponseUtil.getDownDirection(devices.get(i));
+            Direction touchUpDirection = screenResponseUtil.getUpDirection(devices.get(i));
 
-            if(downDirection != CENTER){
+            if(touchDownDirection != CENTER){
                 ScreenResponse screenResponse = new ScreenResponse();
                 if(i != 0) {
-                    int previousId = i;
-                    previousId--;
+                    int previousId = i - 1;
                     screenResponse.setId(devices.get(previousId).getId());
-                    screenResponseUtil.setScreenResponsePlusMinus(devices.get(i), downDirection, screenResponse);
+                    screenResponseUtil.setScreenResponsePlusMinus(devices.get(i), touchDownDirection, screenResponse);
                     screenResponse.setIntersectX(devices.get(previousId).getTouchUpX());
                     screenResponse.setIntersectY(devices.get(previousId).getTouchUpY());
                     screenResponse.setDirection(screenResponseUtil.getUpDirection(devices.get(previousId)));
                     screenResponseList.add(screenResponse);
                 }
             }
-            if(upDirection != CENTER){
+            if(touchUpDirection != CENTER){
                 ScreenResponse screenResponse = new ScreenResponse();
                 if(i != devices.size() -1){
                     int nextId = i;
                     nextId++;
                     screenResponse.setId(devices.get(nextId).getId());
-                    screenResponseUtil.setScreenResponsePlusMinus(devices.get(i),upDirection,screenResponse);
+                    screenResponseUtil.setScreenResponsePlusMinus(devices.get(i),touchUpDirection,screenResponse);
                     screenResponse.setIntersectX(devices.get(nextId).getTouchDownX());
                     screenResponse.setIntersectY(devices.get(nextId).getTouchDownY());
                     screenResponse.setDirection(screenResponseUtil.getDownDirection(devices.get(nextId)));

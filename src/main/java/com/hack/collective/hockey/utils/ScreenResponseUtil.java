@@ -19,7 +19,7 @@ public class ScreenResponseUtil {
             case RIGHT:
             case LEFT:
                 screenResponse.setIntersectMinus(device.getTouchDownY());
-                screenResponse.setIntersectPlus(device.getDeviceWidth() - device.getTouchDownY());
+                screenResponse.setIntersectPlus(device.getDeviceHeight() - device.getTouchDownY());
                 break;
         }
     }

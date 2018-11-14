@@ -60,7 +60,7 @@ public class HockeyService {
         ScreenResponseUtil screenResponseUtil = new ScreenResponseUtil();
         List<ScreenResponse> screenResponseList = new ArrayList<>();
         devices.add(new Device());
-        devices.get(1).setId(devices.get(0).getId());
+        devices.get(1).setId("5457564656");
         devices.get(1).setDeviceHeight(devices.get(0).getDeviceHeight());
         devices.get(1).setDeviceWidth(devices.get(0).getDeviceWidth());
         devices.get(1).setTouchDownX(0f);

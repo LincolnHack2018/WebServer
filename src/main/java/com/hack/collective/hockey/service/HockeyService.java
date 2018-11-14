@@ -43,7 +43,7 @@ public class HockeyService {
         while (true) {
             if (System.currentTimeMillis() - timer > 2000) {
                 System.out.println(devices);
-                if (devices.size() < 1) {
+                if (devices.size() <= 1) {
                     sendData(emptyList());
                     tearDown();
                     return;
@@ -59,15 +59,6 @@ public class HockeyService {
     private List<ScreenResponse> createScreenResponses() {
         ScreenResponseUtil screenResponseUtil = new ScreenResponseUtil();
         List<ScreenResponse> screenResponseList = new ArrayList<>();
-        devices.add(new Device());
-        devices.get(1).setId(devices.get(0).getId());
-        devices.get(0).setId("5457564656");
-        devices.get(1).setDeviceHeight(devices.get(0).getDeviceHeight());
-        devices.get(1).setDeviceWidth(devices.get(0).getDeviceWidth());
-        devices.get(1).setTouchDownX(0f);
-        devices.get(1).setTouchDownY(6f);
-        devices.get(1).setTouchUpX(6f);
-        devices.get(1).setTouchUpY(6f);
 
         for(int i = 0; i < devices.size(); i++){
             Direction touchDownDirection = screenResponseUtil.getDownDirection(devices.get(i));

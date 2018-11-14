@@ -67,23 +67,23 @@ public class ScreenResponseUtil {
         }else{
             switch (getDownDirection(otherDevice)) {
                 case BOTTOM:
-                    first = otherDevice.getTouchDownX() - left;
-                    second = otherDevice.getTouchDownX() + right;
-                    pairs.add(new Pair<>(first, second));
-                    break;
-                case TOP:
                     first = otherDevice.getTouchDownX() + left;
                     second = otherDevice.getTouchDownX() - right;
                     pairs.add(new Pair<>(first, second));
                     break;
+                case TOP:
+                    first = otherDevice.getTouchDownX() - left;
+                    second = otherDevice.getTouchDownX() + right;
+                    pairs.add(new Pair<>(first, second));
+                    break;
                 case RIGHT:
-                    first = otherDevice.getTouchDownY() - left;
-                    second = otherDevice.getTouchDownY() + right;
+                    first = otherDevice.getTouchDownY() + left;
+                    second = otherDevice.getTouchDownY() - right;
                     pairs.add(new Pair<>(first, second));
                     break;
                 case LEFT:
-                    first = otherDevice.getTouchDownY() + left;
-                    second = otherDevice.getTouchDownY() - right;
+                    first = otherDevice.getTouchDownY() - left;
+                    second = otherDevice.getTouchDownY() + right;
                     pairs.add(new Pair<>(first, second));
                     break;
             }

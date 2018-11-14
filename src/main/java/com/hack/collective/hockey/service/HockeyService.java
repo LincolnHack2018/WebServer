@@ -59,7 +59,15 @@ public class HockeyService {
     private List<ScreenResponse> createScreenResponses() {
         ScreenResponseUtil screenResponseUtil = new ScreenResponseUtil();
         List<ScreenResponse> screenResponseList = new ArrayList<>();
-        devices.add(devices.get(0));
+        devices.add(new Device());
+        devices.get(1).setId(devices.get(0).getId());
+        devices.get(1).setDeviceHeight(devices.get(0).getDeviceHeight());
+        devices.get(1).setDeviceWidth(devices.get(0).getDeviceWidth());
+        devices.get(1).setTouchDownX(devices.get(0).getTouchUpX());
+        devices.get(1).setTouchDownY(devices.get(0).getTouchUpY());
+        devices.get(1).setTouchUpX(devices.get(0).getTouchDownX());
+        devices.get(1).setTouchUpY(devices.get(0).getTouchDownY());
+        devices.get(0).setId("0");
 
         for(int i = 0; i < devices.size(); i++){
             Direction touchDownDirection = screenResponseUtil.getDownDirection(devices.get(i));

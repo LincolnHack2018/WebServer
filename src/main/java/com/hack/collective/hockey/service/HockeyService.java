@@ -92,9 +92,7 @@ public class HockeyService {
 
             }
         }
-        if(screenResponseList.get(0).getIntersectDistances() == null || screenResponseList.get(0).getIntersectDistances().isEmpty()){
-            screenResponseList.get(0).setIntersectDistances(screenResponseList.get(1).getIntersectDistances());
-        }
+
         return screenResponseList;
     }
 

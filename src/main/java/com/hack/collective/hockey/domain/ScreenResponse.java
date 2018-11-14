@@ -3,13 +3,16 @@ package com.hack.collective.hockey.domain;
 import com.hack.collective.hockey.enums.Direction;
 import lombok.Data;
 
+import java.util.ArrayList;
+
 @Data
 public class ScreenResponse {
     private String id;
-    private float intersectX;
-    private float intersectY;
-    private float intersectPlus;
-    private float intersectMinus;
+    private ArrayList<Pair<Float>> intersectDistances;
     private Direction direction;
     private boolean mainDevice;
+    private float screenOneX;
+    private float screenOneY;
+    private float screenTwoX;
+    private float screenTwoY;
 }

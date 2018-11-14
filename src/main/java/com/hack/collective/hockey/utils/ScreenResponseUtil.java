@@ -1,42 +1,92 @@
 package com.hack.collective.hockey.utils;
 
 import com.hack.collective.hockey.domain.Device;
+import com.hack.collective.hockey.domain.Pair;
 import com.hack.collective.hockey.domain.ScreenResponse;
 import com.hack.collective.hockey.enums.Direction;
+
+import java.util.ArrayList;
 
 import static com.hack.collective.hockey.enums.Direction.*;
 
 public class ScreenResponseUtil {
     private static final int TOLERANCE = 1;
 
-    public void setScreenResponsePlusMinusDown(Device device, Direction direction, ScreenResponse screenResponse){
+    public void setScreenResponseOpeningPointsUpOrDown(Device otherDevice, Device device, Direction direction, ScreenResponse screenResponse, boolean previous){
+        float left;
+        float right;
         switch (direction){
             case BOTTOM:
+                left = device.getTouchDownX();
+                right = device.getDeviceWidth() - device.getTouchDownX();
+                createPairs(otherDevice,screenResponse, left, right, previous);
             case TOP:
-                screenResponse.setIntersectMinus(device.getTouchDownX());
-                screenResponse.setIntersectPlus(device.getDeviceWidth() - device.getTouchDownX());
+                left = device.getDeviceWidth() - device.getTouchDownX();
+                right = device.getTouchDownX();
+                createPairs(otherDevice,screenResponse, left, right, previous);
                 break;
             case RIGHT:
+                left = device.getTouchDownY();
+                right = device.getDeviceHeight() - device.getTouchDownY();
+                createPairs(otherDevice,screenResponse, left, right, previous);
             case LEFT:
-                screenResponse.setIntersectMinus(device.getTouchDownY());
-                screenResponse.setIntersectPlus(device.getDeviceHeight() - device.getTouchDownY());
+                left = device.getDeviceHeight() - device.getTouchDownY();
+                right = device.getTouchDownY();
+                createPairs(otherDevice,screenResponse, left, right, previous);
                 break;
         }
     }
 
-    public void setScreenResponsePlusMinusUp(Device device, Direction direction, ScreenResponse screenResponse){
-        switch (direction){
-            case BOTTOM:
-            case TOP:
-                screenResponse.setIntersectMinus(device.getTouchUpX());
-                screenResponse.setIntersectPlus(device.getDeviceWidth() - device.getTouchUpX());
-                break;
-            case RIGHT:
-            case LEFT:
-                screenResponse.setIntersectMinus(device.getTouchUpY());
-                screenResponse.setIntersectPlus(device.getDeviceHeight() - device.getTouchUpY());
-                break;
+    private void createPairs(Device otherDevice, ScreenResponse screenResponse, float left, float right, boolean previous){
+        ArrayList<Pair<Float>> pairs = new ArrayList<>();
+        float first;
+        float second;
+        if(previous) {
+            switch (getUpDirection(otherDevice)) {
+                case BOTTOM:
+                    first = otherDevice.getTouchUpX() - left;
+                    second = otherDevice.getTouchUpX() + right;
+                    pairs.add(new Pair<>(first, second));
+                case TOP:
+                    first = otherDevice.getTouchUpX() + left;
+                    second = otherDevice.getTouchUpX() - right;
+                    pairs.add(new Pair<>(first, second));
+                    break;
+                case RIGHT:
+                    first = otherDevice.getTouchUpY() - left;
+                    second = otherDevice.getTouchUpY() + right;
+                    pairs.add(new Pair<>(first, second));
+                    break;
+                case LEFT:
+                    first = otherDevice.getTouchUpY() + left;
+                    second = otherDevice.getTouchUpY() - right;
+                    pairs.add(new Pair<>(first, second));
+                    break;
+            }
+        }else{
+            switch (getDownDirection(otherDevice)) {
+                case BOTTOM:
+                    first = otherDevice.getTouchDownX() - left;
+                    second = otherDevice.getTouchDownX() + right;
+                    pairs.add(new Pair<>(first, second));
+                case TOP:
+                    first = otherDevice.getTouchDownX() + left;
+                    second = otherDevice.getTouchDownX() - right;
+                    pairs.add(new Pair<>(first, second));
+                    break;
+                case RIGHT:
+                    first = otherDevice.getTouchDownY() - left;
+                    second = otherDevice.getTouchDownY() + right;
+                    pairs.add(new Pair<>(first, second));
+                    break;
+                case LEFT:
+                    first = otherDevice.getTouchDownY() + left;
+                    second = otherDevice.getTouchDownY() - right;
+                    pairs.add(new Pair<>(first, second));
+                    break;
+            }
         }
+        screenResponse.setIntersectDistances(pairs);
     }
 
     public Direction getDownDirection(Device device) {

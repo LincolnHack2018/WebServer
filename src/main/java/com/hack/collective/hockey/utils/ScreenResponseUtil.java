@@ -12,32 +12,32 @@ import static com.hack.collective.hockey.enums.Direction.*;
 public class ScreenResponseUtil {
     private static final int TOLERANCE = 1;
 
-    public void setScreenResponseOpeningPointsUpOrDown(Device otherDevice, Device device, Direction direction, ScreenResponse screenResponse, boolean previous){
+    public ArrayList<Pair<Float>> setScreenResponseOpeningPointsUpOrDown(Device otherDevice, Device device, Direction direction, boolean previous){
         float left;
         float right;
         switch (direction){
             case BOTTOM:
                 left = device.getTouchDownX();
                 right = device.getDeviceWidth() - device.getTouchDownX();
-                createPairs(otherDevice,screenResponse, left, right, previous);
+                return createPairs(otherDevice, left, right, previous);
             case TOP:
                 left = device.getDeviceWidth() - device.getTouchDownX();
                 right = device.getTouchDownX();
-                createPairs(otherDevice,screenResponse, left, right, previous);
-                break;
+                return createPairs(otherDevice, left, right, previous);
             case RIGHT:
                 left = device.getTouchDownY();
                 right = device.getDeviceHeight() - device.getTouchDownY();
-                createPairs(otherDevice,screenResponse, left, right, previous);
+                return createPairs(otherDevice, left, right, previous);
             case LEFT:
                 left = device.getDeviceHeight() - device.getTouchDownY();
                 right = device.getTouchDownY();
-                createPairs(otherDevice,screenResponse, left, right, previous);
-                break;
+                return createPairs(otherDevice, left, right, previous);
+            default:
+                throw new RuntimeException("wtf");
         }
     }
 
-    private void createPairs(Device otherDevice, ScreenResponse screenResponse, float left, float right, boolean previous){
+    private ArrayList<Pair<Float>> createPairs(Device otherDevice, float left, float right, boolean previous){
         ArrayList<Pair<Float>> pairs = new ArrayList<>();
         float first;
         float second;
@@ -47,6 +47,7 @@ public class ScreenResponseUtil {
                     first = otherDevice.getTouchUpX() - left;
                     second = otherDevice.getTouchUpX() + right;
                     pairs.add(new Pair<>(first, second));
+                    break;
                 case TOP:
                     first = otherDevice.getTouchUpX() + left;
                     second = otherDevice.getTouchUpX() - right;
@@ -69,6 +70,7 @@ public class ScreenResponseUtil {
                     first = otherDevice.getTouchDownX() - left;
                     second = otherDevice.getTouchDownX() + right;
                     pairs.add(new Pair<>(first, second));
+                    break;
                 case TOP:
                     first = otherDevice.getTouchDownX() + left;
                     second = otherDevice.getTouchDownX() - right;
@@ -86,7 +88,7 @@ public class ScreenResponseUtil {
                     break;
             }
         }
-        screenResponse.setIntersectDistances(pairs);
+        return pairs;
     }
 
     public Direction getDownDirection(Device device) {

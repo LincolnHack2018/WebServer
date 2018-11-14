@@ -63,10 +63,10 @@ public class HockeyService {
         devices.get(1).setId("16554646");
         devices.get(1).setDeviceHeight(devices.get(0).getDeviceHeight());
         devices.get(1).setDeviceWidth(devices.get(0).getDeviceWidth());
-        devices.get(1).setTouchDownX(0);
-        devices.get(1).setTouchDownY(6);
-        devices.get(1).setTouchUpX(6);
-        devices.get(1).setTouchUpY(6);
+        devices.get(1).setTouchDownX(0f);
+        devices.get(1).setTouchDownY(6f);
+        devices.get(1).setTouchUpX(6f);
+        devices.get(1).setTouchUpY(6f);
 
         for(int i = 0; i < devices.size(); i++){
             Direction touchDownDirection = screenResponseUtil.getDownDirection(devices.get(i));

@@ -85,7 +85,7 @@ public class HockeyService {
                     int nextId = i;
                     nextId++;
                     screenResponse.setId(devices.get(nextId).getId());
-                    screenResponseUtil.setScreenResponseOpeningPointsUpOrDown(devices.get(nextId), devices.get(i), touchDownDirection, screenResponse, false);
+                    screenResponseUtil.setScreenResponseOpeningPointsUpOrDown(devices.get(nextId), devices.get(i), touchUpDirection, screenResponse, false);
                     screenResponse.setDirection(screenResponseUtil.getDownDirection(devices.get(nextId)));
                     screenResponseList.add(screenResponse);
                 }

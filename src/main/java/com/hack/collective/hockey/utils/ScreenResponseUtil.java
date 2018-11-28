@@ -43,46 +43,46 @@ public class ScreenResponseUtil {
         float second;
         if(previous) {
             switch (getUpDirection(otherDevice)) {
-//                case BOTTOM:
-//                    first = otherDevice.getTouchUpX() - left;
-//                    second = otherDevice.getTouchUpX() + right;
-//                    pairs.add(new Pair<>(first, second));
-//                    break;
-//                case TOP:
-//                    first = otherDevice.getTouchUpX() + left;
-//                    second = otherDevice.getTouchUpX() - right;
-//                    pairs.add(new Pair<>(first, second));
-//                    break;
-//                case RIGHT:
-//                    first = otherDevice.getTouchUpY() - left;
-//                    second = otherDevice.getTouchUpY() + right;
-//                    pairs.add(new Pair<>(first, second));
-//                    break;
-//                case LEFT:
-//                    first = otherDevice.getTouchUpY() + left;
-//                    second = otherDevice.getTouchUpY() - right;
-//                    pairs.add(new Pair<>(first, second));
-//                    break;
                 case BOTTOM:
-                    first = otherDevice.getTouchDownX() + left;
-                    second = otherDevice.getTouchDownX() - right;
+                    first = otherDevice.getTouchUpX() - left;
+                    second = otherDevice.getTouchUpX() + right;
                     pairs.add(new Pair<>(first, second));
                     break;
                 case TOP:
-                    first = otherDevice.getTouchDownX() - left;
-                    second = otherDevice.getTouchDownX() + right;
+                    first = otherDevice.getTouchUpX() + left;
+                    second = otherDevice.getTouchUpX() - right;
                     pairs.add(new Pair<>(first, second));
                     break;
                 case RIGHT:
-                    first = otherDevice.getTouchDownY() + left;
-                    second = otherDevice.getTouchDownY() - right;
+                    first = otherDevice.getTouchUpY() - left;
+                    second = otherDevice.getTouchUpY() + right;
                     pairs.add(new Pair<>(first, second));
                     break;
                 case LEFT:
-                    first = otherDevice.getTouchDownY() - left;
-                    second = otherDevice.getTouchDownY() + right;
+                    first = otherDevice.getTouchUpY() + left;
+                    second = otherDevice.getTouchUpY() - right;
                     pairs.add(new Pair<>(first, second));
                     break;
+//                case BOTTOM:
+//                    first = otherDevice.getTouchDownX() + left;
+//                    second = otherDevice.getTouchDownX() - right;
+//                    pairs.add(new Pair<>(first, second));
+//                    break;
+//                case TOP:
+//                    first = otherDevice.getTouchDownX() - left;
+//                    second = otherDevice.getTouchDownX() + right;
+//                    pairs.add(new Pair<>(first, second));
+//                    break;
+//                case RIGHT:
+//                    first = otherDevice.getTouchDownY() + left;
+//                    second = otherDevice.getTouchDownY() - right;
+//                    pairs.add(new Pair<>(first, second));
+//                    break;
+//                case LEFT:
+//                    first = otherDevice.getTouchDownY() - left;
+//                    second = otherDevice.getTouchDownY() + right;
+//                    pairs.add(new Pair<>(first, second));
+//                    break;
             }
         }else{
             switch (getDownDirection(otherDevice)) {
@@ -118,7 +118,7 @@ public class ScreenResponseUtil {
             return RIGHT;
         }else if(device.getTouchDownY() >= 0 && device.getTouchDownY() < TOLERANCE){
             return BOTTOM;
-        }else if(device.getTouchDownY() < device.getDeviceWidth() && device.getTouchDownY() > device.getDeviceWidth() - TOLERANCE){
+        }else if(device.getTouchDownY() < device.getDeviceHeight() && device.getTouchDownY() > device.getDeviceHeight() - TOLERANCE){
             return TOP;
         }
         return CENTER;

@@ -19,30 +19,36 @@ public class ScreenResponseUtil {
             case BOTTOM:
                 left = device.getTouchDownX();
                 right = device.getDeviceWidth() - device.getTouchDownX();
-                return createPairs(otherDevice, left, right, previous);
+                return createPairs(otherDevice, left, right, previous, direction);
             case TOP:
                 left = device.getDeviceWidth() - device.getTouchDownX();
                 right = device.getTouchDownX();
-                return createPairs(otherDevice, left, right, previous);
+                return createPairs(otherDevice, left, right, previous, direction);
             case RIGHT:
                 left = device.getTouchDownY();
                 right = device.getDeviceHeight() - device.getTouchDownY();
-                return createPairs(otherDevice, left, right, previous);
+                return createPairs(otherDevice, left, right, previous, direction);
             case LEFT:
                 left = device.getDeviceHeight() - device.getTouchDownY();
                 right = device.getTouchDownY();
-                return createPairs(otherDevice, left, right, previous);
+                return createPairs(otherDevice, left, right, previous, direction);
             default:
                 throw new RuntimeException("wtf");
         }
     }
 
-    private ArrayList<Pair<Float>> createPairs(Device otherDevice, float left, float right, boolean previous){
+    private ArrayList<Pair<Float>> createPairs(Device otherDevice, float left, float right, boolean previous, Direction direction){
         ArrayList<Pair<Float>> pairs = new ArrayList<>();
         float first;
         float second;
-        if(previous) {
+        boolean directionUpSame = false;
+        boolean directionDownSame = false;
+        if(direction == getUpDirection(otherDevice)){
+            directionUpSame = true;
+        }
+        if(previous && !directionDownSame) {
             switch (getUpDirection(otherDevice)) {
+
                 case BOTTOM:
                     first = otherDevice.getTouchUpX() - left;
                     second = otherDevice.getTouchUpX() + right;

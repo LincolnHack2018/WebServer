@@ -19,25 +19,25 @@ public class ScreenResponseUtil {
             case BOTTOM:
                 left = device.getTouchDownX();
                 right = device.getDeviceWidth() - device.getTouchDownX();
-                return createPairs(otherDevice, left, right, previous, direction);
+                return createPairs(otherDevice, left, right, previous);
             case TOP:
                 left = device.getDeviceWidth() - device.getTouchDownX();
                 right = device.getTouchDownX();
-                return createPairs(otherDevice, left, right, previous, direction);
+                return createPairs(otherDevice, left, right, previous);
             case RIGHT:
                 left = device.getTouchDownY();
                 right = device.getDeviceHeight() - device.getTouchDownY();
-                return createPairs(otherDevice, left, right, previous, direction);
+                return createPairs(otherDevice, left, right, previous);
             case LEFT:
                 left = device.getDeviceHeight() - device.getTouchDownY();
                 right = device.getTouchDownY();
-                return createPairs(otherDevice, left, right, previous, direction);
+                return createPairs(otherDevice, left, right, previous);
             default:
                 throw new RuntimeException("wtf");
         }
     }
 
-    private ArrayList<Pair<Float>> createPairs(Device otherDevice, float left, float right, boolean previous, Direction direction){
+    private ArrayList<Pair<Float>> createPairs(Device otherDevice, float left, float right, boolean previous){
         ArrayList<Pair<Float>> pairs = new ArrayList<>();
         float first;
         float second;

@@ -15,4 +15,5 @@ public class ScreenResponse {
     private float screenOneY;
     private float screenTwoX;
     private float screenTwoY;
+    private int orderNumber;
 }

@@ -70,6 +70,7 @@ public class HockeyService {
                 if(i != 0) {
                     int previousId = i - 1;
                     screenResponse.setId(devices.get(previousId).getId());
+                    screenResponse.setOrderNumber(previousId);
                     screenResponse.setIntersectDistances(screenResponseUtil.setScreenResponseOpeningPointsUpOrDown(devices.get(previousId), devices.get(i), touchDownDirection, true));
                     screenResponse.setDirection(screenResponseUtil.getUpDirection(devices.get(previousId)));
 
@@ -86,6 +87,7 @@ public class HockeyService {
                     int nextId = i;
                     nextId++;
                     screenResponse.setId(devices.get(nextId).getId());
+                    screenResponse.setOrderNumber(nextId);
                     screenResponse.setIntersectDistances(screenResponseUtil.setScreenResponseOpeningPointsUpOrDown(devices.get(nextId), devices.get(i), touchUpDirection, false));
                     screenResponse.setDirection(screenResponseUtil.getDownDirection(devices.get(nextId)));
                     screenResponseList.add(screenResponse);

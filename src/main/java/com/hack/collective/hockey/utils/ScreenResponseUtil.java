@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import static com.hack.collective.hockey.enums.Direction.*;
 
 public class ScreenResponseUtil {
-    private static final float TOLERANCE = 1f;
+    private static final float TOLERANCE = 2.5f;
 
     public ArrayList<Pair<Float>> setScreenResponseOpeningPointsUpOrDown(Device otherDevice, Device device, Direction direction, boolean previous){
         float left;

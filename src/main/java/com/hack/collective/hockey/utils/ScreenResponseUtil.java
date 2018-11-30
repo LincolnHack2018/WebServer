@@ -50,8 +50,8 @@ public class ScreenResponseUtil {
                     pairs.add(new Pair<>(first, second));
                     break;
                 case TOP:
-                    first = otherDevice.getTouchUpX() - left;
-                    second = otherDevice.getTouchUpX() + right;
+                    first = otherDevice.getTouchUpX() + left;
+                    second = otherDevice.getTouchUpX() - right;
                     pairs.add(new Pair<>(first, second));
                     break;
                 case RIGHT:
@@ -60,8 +60,8 @@ public class ScreenResponseUtil {
                     pairs.add(new Pair<>(first, second));
                     break;
                 case LEFT:
-                    first = otherDevice.getTouchUpY() - left;
-                    second = otherDevice.getTouchUpY() + right;
+                    first = otherDevice.getTouchUpY() + left;
+                    second = otherDevice.getTouchUpY() - right;
                     pairs.add(new Pair<>(first, second));
                     break;
             }
@@ -73,8 +73,8 @@ public class ScreenResponseUtil {
                     pairs.add(new Pair<>(first, second));
                     break;
                 case TOP:
-                    first = otherDevice.getTouchDownX() - left;
-                    second = otherDevice.getTouchDownX() + right;
+                    first = otherDevice.getTouchDownX() + left;
+                    second = otherDevice.getTouchDownX() - right;
                     pairs.add(new Pair<>(first, second));
                     break;
                 case RIGHT:
@@ -83,8 +83,8 @@ public class ScreenResponseUtil {
                     pairs.add(new Pair<>(first, second));
                     break;
                 case LEFT:
-                    first = otherDevice.getTouchDownY() - left;
-                    second = otherDevice.getTouchDownY() + right;
+                    first = otherDevice.getTouchDownY() + left;
+                    second = otherDevice.getTouchDownY() - right;
                     pairs.add(new Pair<>(first, second));
                     break;
             }

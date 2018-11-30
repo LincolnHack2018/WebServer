@@ -11,4 +11,5 @@ public class Device {
     private float touchUpY;
     private float deviceWidth;
     private float deviceHeight;
+    private long touchDownTime;
 }

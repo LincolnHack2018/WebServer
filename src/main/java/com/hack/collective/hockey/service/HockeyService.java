@@ -57,6 +57,7 @@ public class HockeyService {
     }
 
     private List<ScreenResponse> createScreenResponses() {
+        sortDevices();
         ScreenResponseUtil screenResponseUtil = new ScreenResponseUtil();
         List<ScreenResponse> screenResponseList = new ArrayList<>();
 
@@ -96,7 +97,9 @@ public class HockeyService {
         return screenResponseList;
     }
 
-
+    private void sortDevices(){
+        devices.sort(Comparator.comparing(Device::getTouchDownTime));
+    }
 
     private void sendData(List<ScreenResponse> coordinates) {
         template.convertAndSend("/init", coordinates);

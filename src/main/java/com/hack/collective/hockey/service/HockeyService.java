@@ -65,7 +65,7 @@ public class HockeyService {
             Direction touchDownDirection = screenResponseUtil.getDownDirection(devices.get(i));
             Direction touchUpDirection = screenResponseUtil.getUpDirection(devices.get(i));
 
-            if(touchDownDirection != CENTER){
+            if(touchDownDirection != CENTER) {
                 ScreenResponse screenResponse = new ScreenResponse();
                 if(i != 0) {
                     int previousId = i - 1;
@@ -81,11 +81,10 @@ public class HockeyService {
                     screenResponseList.add(screenResponse);
                 }
             }
-            if(touchUpDirection != CENTER){
+            if(touchUpDirection != CENTER) {
                 ScreenResponse screenResponse = new ScreenResponse();
                 if(i != devices.size() -1){
-                    int nextId = i;
-                    nextId++;
+                    int nextId = i + 1;
                     screenResponse.setId(devices.get(nextId).getId());
                     screenResponse.setOrderNumber(nextId);
                     screenResponse.setIntersectDistances(screenResponseUtil.setScreenResponseOpeningPointsUpOrDown(devices.get(nextId), devices.get(i), touchUpDirection, false));

@@ -45,18 +45,18 @@ public class ScreenResponseUtil {
             switch (getUpDirection(otherDevice)) {
 
                 case BOTTOM:
-                    first = otherDevice.getTouchUpX() + left;
-                    second = otherDevice.getTouchUpX() - right;
+                    first = otherDevice.getTouchUpX() - right;
+                    second = otherDevice.getTouchUpX() + left;
                     pairs.add(new Pair<>(first, second));
                     break;
                 case TOP:
-                    first = otherDevice.getTouchUpX() + left;
-                    second = otherDevice.getTouchUpX() - right;
+                    first = otherDevice.getTouchUpX() - left;
+                    second = otherDevice.getTouchUpX() + right;
                     pairs.add(new Pair<>(first, second));
                     break;
                 case RIGHT:
-                    first = otherDevice.getTouchUpY() + left;
-                    second = otherDevice.getTouchUpY() - right;
+                    first = otherDevice.getTouchUpY() - left;
+                    second = otherDevice.getTouchUpY() + right;
                     pairs.add(new Pair<>(first, second));
                     break;
                 case LEFT:
@@ -68,23 +68,23 @@ public class ScreenResponseUtil {
         }else{
             switch (getDownDirection(otherDevice)) {
                 case BOTTOM:
-                    first = otherDevice.getTouchDownX() + left;
-                    second = otherDevice.getTouchDownX() - right;
+                    first = otherDevice.getTouchDownX() - right;
+                    second = otherDevice.getTouchDownX() - left;
                     pairs.add(new Pair<>(first, second));
                     break;
                 case TOP:
-                    first = otherDevice.getTouchDownX() + left;
+                    first = otherDevice.getTouchDownX() - left;
                     second = otherDevice.getTouchDownX() - right;
                     pairs.add(new Pair<>(first, second));
                     break;
                 case RIGHT:
-                    first = otherDevice.getTouchDownY() + left;
-                    second = otherDevice.getTouchDownY() - right;
+                    first = otherDevice.getTouchDownY() - right;
+                    second = otherDevice.getTouchDownY() + left;
                     pairs.add(new Pair<>(first, second));
                     break;
                 case LEFT:
-                    first = otherDevice.getTouchDownY() + left;
-                    second = otherDevice.getTouchDownY() - right;
+                    first = otherDevice.getTouchDownY() + right;
+                    second = otherDevice.getTouchDownY() - left;
                     pairs.add(new Pair<>(first, second));
                     break;
             }

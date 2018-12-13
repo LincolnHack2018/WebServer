@@ -39,57 +39,38 @@ public class ScreenResponseUtil {
 
     private ArrayList<Pair<Float>> createPairs(Device otherDevice, float left, float right, boolean previous){
         ArrayList<Pair<Float>> pairs = new ArrayList<>();
-        float first;
-        float second;
         if(previous) {
-            switch (getUpDirection(otherDevice)) {
-
-                case BOTTOM:
-                    first = otherDevice.getTouchUpX() - right;
-                    second = otherDevice.getTouchUpX() + left;
-                    pairs.add(new Pair<>(first, second));
-                    break;
-                case TOP:
-                    first = otherDevice.getTouchUpX() - left;
-                    second = otherDevice.getTouchUpX() + right;
-                    pairs.add(new Pair<>(first, second));
-                    break;
-                case RIGHT:
-                    first = otherDevice.getTouchUpY() + left;
-                    second = otherDevice.getTouchUpY() - right;
-                    pairs.add(new Pair<>(first, second));
-                    break;
-                case LEFT:
-                    first = otherDevice.getTouchUpY() - left;
-                    second = otherDevice.getTouchUpY() + right;
-                    pairs.add(new Pair<>(first, second));
-                    break;
-            }
+            getPairs(getUpDirection(otherDevice), otherDevice, right, left);
         }else{
-            switch (getDownDirection(otherDevice)) {
-                case BOTTOM:
-                    first = otherDevice.getTouchDownX() - right;
-                    second = otherDevice.getTouchDownX() + left;
-                    pairs.add(new Pair<>(first, second));
-                    break;
-                case TOP:
-                    first = otherDevice.getTouchDownX() - left;
-                    second = otherDevice.getTouchDownX() + right;
-                    pairs.add(new Pair<>(first, second));
-                    break;
-                case RIGHT:
-                    first = otherDevice.getTouchDownY() + left;
-                    second = otherDevice.getTouchDownY() - right;
-                    pairs.add(new Pair<>(first, second));
-                    break;
-                case LEFT:
-                    first = otherDevice.getTouchDownY() - left;
-                    second = otherDevice.getTouchDownY() + right;
-                    pairs.add(new Pair<>(first, second));
-                    break;
-            }
+            getPairs(getDownDirection(otherDevice), otherDevice, right, left);
         }
         return pairs;
+    }
+
+    private Pair<Float> getPairs(Direction direction,
+                                 Device otherDevice, float right, float left){
+        float first;
+        float second;
+        switch (direction) {
+            case BOTTOM:
+                first = otherDevice.getTouchUpX() - right;
+                second = otherDevice.getTouchUpX() + left;
+                return new Pair<>(first, second);
+            case TOP:
+                first = otherDevice.getTouchUpX() - left;
+                second = otherDevice.getTouchUpX() + right;
+                return new Pair<>(first, second);
+            case RIGHT:
+                first = otherDevice.getTouchUpY() + left;
+                second = otherDevice.getTouchUpY() - right;
+                return new Pair<>(first, second);
+            case LEFT:
+                first = otherDevice.getTouchUpY() - left;
+                second = otherDevice.getTouchUpY() + right;
+                return new Pair<>(first, second);
+            default:
+                throw new RuntimeException("you gone done fucked up");
+        }
     }
 
     public Direction getDownDirection(Device device) {

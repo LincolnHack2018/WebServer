@@ -40,9 +40,9 @@ public class ScreenResponseUtil {
     private ArrayList<Pair<Float>> createPairs(Device otherDevice, float left, float right, boolean previous){
         ArrayList<Pair<Float>> pairs = new ArrayList<>();
         if(previous) {
-            getPairs(getUpDirection(otherDevice), otherDevice, right, left);
+            pairs.add(getPairs(getUpDirection(otherDevice), otherDevice, right, left));
         }else{
-            getPairs(getDownDirection(otherDevice), otherDevice, right, left);
+            pairs.add(getPairs(getUpDirection(otherDevice), otherDevice, right, left));
         }
         return pairs;
     }
